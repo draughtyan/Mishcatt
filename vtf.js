@@ -98,17 +98,17 @@ function setResolution() {
 }
 
 function check() {
-	if (false && (getEstFileSize(false)/1024 >= 512 && getEstFileSize(false)/1024 < 513)){
+	if (getEstFileSize(false)/1024 >= 512 && getEstFileSize(false)/1024 < 513){
 		shortened = true;
 		document.getElementById("resolutionNotice").innerHTML = "Changed to "+(width-4)+"x"+height;
 		document.getElementById("resolutionNotice").style.visibility = "visible";
 	}
-	else if (true || (shortened && getEstFileSize(false)/1024 < ((width - 4) / width) * 512 - 1)){
+	else if (shortened && getEstFileSize(false)/1024 < ((width - 4) / width) * 512 - 1){
 		shortened = false;
 		document.getElementById("resolutionNotice").innerHTML = "";
 		document.getElementById("resolutionNotice").style.visibility = "hidden";
 	}
-	if (false && (getEstFileSize(false)/1024 >= 385 || shortened || document.getElementById("sampling").value == 1 || width % 64 != 0 || height % 64 != 0)){
+	if (getEstFileSize(false)/1024 >= 385 || shortened || document.getElementById("sampling").value == 1 || width % 64 != 0 || height % 64 != 0){
 		document.getElementById("mipmapsCheck").disabled = true;
 		document.getElementById("mipmapsCheck").checked = false;
 	}
@@ -117,7 +117,7 @@ function check() {
 			document.getElementById("mipmapsCheck").checked = true;
 		document.getElementById("mipmapsCheck").disabled = false;
 	}
-	reducedMipmaps = false;
+	reducedMipmaps = getEstFileSize(false)/1024 >= 384;
 	showMipmap(document.getElementById("mipmapsCheck"));
 }
 
@@ -1051,4 +1051,3 @@ function downloadVMT(){
 }`;
 	download(vmtFileText, "vmt");
 }
-
